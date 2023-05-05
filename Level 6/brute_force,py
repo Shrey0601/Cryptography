@@ -1,0 +1,21 @@
+import requests
+
+# Read input from text file
+with open("submit.sage", "r") as f:
+    input_text = f.read()
+
+inp = input_text.split('\n')
+l = len(inp)
+# Submit input to SageCell and store output
+url = "https://sagecell.sagemath.org/service"
+payload = {"code": input_text}
+response = requests.post(url, data=payload)
+output_text = response.text
+
+# Save output to text file
+with open("output.txt", "a") as f:
+    f.write(inp[79].strip())
+    f.write('\n')
+    f.write(output_text)
+    f.write('\n')
+    f.write('\n')
